@@ -1,6 +1,6 @@
 ### 🚧 Under Construction 🚧
 
-In the meantime, you can check my other stuff (shameless 🔌):
+Check out my other stuff (shameless 🔌):
 
 - 🎧  [@massimiliano_diamante](https://www.mixcloud.com/massimiliano_diamante/)
 - 📷  [@massimiliano_diamante](https://www.instagram.com/massimiliano_diamante)
