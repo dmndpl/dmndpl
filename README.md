@@ -2,9 +2,8 @@
 
 In the meantime, you can check my other stuff (shameless 🔌):
 
-🎧 [ @massimiliano_diamante](https://www.mixcloud.com/massimiliano_diamante/)
-
-📷 [ @massimiliano_diamante](www.instagram.com/massimiliano_diamante)
+- 🎧 [ @massimiliano_diamante](https://www.mixcloud.com/massimiliano_diamante/)
+- 📷 [ @massimiliano_diamante](www.instagram.com/massimiliano_diamante)
 
 <!--
 **dmndpl/dmndpl** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
