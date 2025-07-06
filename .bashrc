@@ -16,6 +16,7 @@ GREEN='\[\e[1;32m\]'
 BLUE='\[\e[1;34m\]'
 PURPLE='\[\e[1;35m\]'
 CYAN='\[\e[1;36m\]'
+YELLOW='\[\e[1;33m\]'
 
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -76,11 +77,11 @@ parse_git_branch() {
   git rev-parse --is-inside-work-tree &>/dev/null || return
   local branch dirty
   branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
-  git diff --quiet --ignore-submodules HEAD &>/dev/null || dirty="*"
-  echo " ($branch$dirty)"
+  git diff --quiet --ignore-submodules HEAD &>/dev/null || dirty=" ?"
+  echo " $branch$dirty"
 }
 
-export PS1="${CYAN}\t ${RED}\$(show_exit_code)${RESET}${GREEN}\u@\h${RESET}:${BLUE}\w${RESET}${PURPLE}\$(parse_git_branch)${RESET}\$ "
+export PS1="${CYAN}\t ${RED}\$(show_exit_code)${RESET}${BLUE}\u${RESET} ${PURPLE}\w${RESET}${YELLOW}\$(parse_git_branch)${RESET} "
 
 
 #if [ "$color_prompt" = yes ]; then
