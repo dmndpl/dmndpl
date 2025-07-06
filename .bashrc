@@ -56,23 +56,32 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-# Function to get current Git branch
+# Git branch with dirty state (* = uncommitted changes)
 parse_git_branch() {
-  git rev-parse --is-inside-work-tree &> /dev/null || return
-  local branch
+  git rev-parse --is-inside-work-tree &>/dev/null || return
+  local branch dirty
   branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
-  echo " (\[\e[1;35m\]$branch\[\e[0m\])"
+  git diff --quiet --ignore-submodules HEAD &>/dev/null || dirty="*"
+  echo " ($branch$dirty)"
 }
 
-# Set PS1
-export PS1="\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$(parse_git_branch) \$ "
+# Exit code display if last command failed
+show_exit_code() {
+  local exit="$?"
+  if [ "$exit" -ne 0 ]; then
+    echo -e "[exit:$exit]"
+  fi
+}
+
+# Set the prompt
+export PS1='$(show_exit_code)\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]$(parse_git_branch)\$ '
 
 
-if [ "$color_prompt" = yes ]; then
-    export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(parse_git_branch)\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
+#if [ "$color_prompt" = yes ]; then
+#    export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(parse_git_branch)\$ '
+#else
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+#fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
