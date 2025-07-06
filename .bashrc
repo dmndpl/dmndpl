@@ -8,6 +8,16 @@ case $- in
       *) return;;
 esac
 
+# Colors
+RESET='\[\e[0m\]'
+
+RED='\[\e[1;31m\]'
+GREEN='\[\e[1;32m\]'
+BLUE='\[\e[1;34m\]'
+PURPLE='\[\e[1;35m\]'
+CYAN='\[\e[1;36m\]'
+
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -57,6 +67,11 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 # Git branch with dirty state (* = uncommitted changes)
+show_exit_code() {
+  local exit="$?"
+  [ "$exit" -ne 0 ] && echo "[exit:$exit]"
+}
+
 parse_git_branch() {
   git rev-parse --is-inside-work-tree &>/dev/null || return
   local branch dirty
@@ -65,16 +80,7 @@ parse_git_branch() {
   echo " ($branch$dirty)"
 }
 
-# Exit code display if last command failed
-show_exit_code() {
-  local exit="$?"
-  if [ "$exit" -ne 0 ]; then
-    echo -e "[exit:$exit]"
-  fi
-}
-
-# Set the prompt
-export PS1='$(show_exit_code)\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]$(parse_git_branch)\$ '
+export PS1="${CYAN}\t ${RED}\$(show_exit_code)${RESET}${GREEN}\u@\h${RESET}:${BLUE}\w${RESET}${PURPLE}\$(parse_git_branch)${RESET}\$ "
 
 
 #if [ "$color_prompt" = yes ]; then
