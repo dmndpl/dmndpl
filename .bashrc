@@ -81,7 +81,7 @@ parse_git_branch() {
   echo " $branch$dirty"
 }
 
-export PS1="${CYAN}\t ${RED}\$(show_exit_code)${RESET}${BLUE}\u${RESET} ${PURPLE}\w${RESET}${YELLOW}\$(parse_git_branch)${RESET} "
+export PS1="${GREEN}\t ${RESET}${BLUE}\u${RESET} ${PURPLE}\w${RESET}${YELLOW}\$(parse_git_branch)${RESET} "
 
 
 #if [ "$color_prompt" = yes ]; then
@@ -145,3 +145,4 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
