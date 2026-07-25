@@ -16,6 +16,7 @@ brew "wget"
 brew "mise"
 brew "uv"
 brew "shellcheck"
+brew "luarocks"
 
 #nchad dependencies
 brew "tree-sitter-cli"
