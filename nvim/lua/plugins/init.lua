@@ -19,6 +19,8 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    commit = "cf12346a3414fa1b06af75c79faebe7f76df080a",
+    pin = true,
     opts = {
       ensure_installed = {
         "vim",
