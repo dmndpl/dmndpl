@@ -32,6 +32,7 @@ return {
         "svelte",
         "javascript",
         "typescript",
+        "markdown",
       },
     },
   },
