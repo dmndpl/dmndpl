@@ -43,3 +43,5 @@ alias vim="nvim"
 alias ls="eza --icons=auto --group-directories-first"
 alias ll="eza -lah --group-directories-first --icons=auto"
 alias cat="bat"
+
+export PATH="$HOME/dev/dmndpl/zsh:$PATH"

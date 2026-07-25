@@ -1,0 +1,78 @@
+#!/usr/bin/env zsh
+
+setopt ERR_EXIT
+setopt NO_UNSET
+setopt PIPE_FAIL
+
+root_directory="${1:-.}"
+
+if [[ ! -d "$root_directory" ]]; then
+  print -u2 "upward: not a directory: $root_directory"
+  exit 1
+fi
+
+root_directory="${root_directory:A}"
+
+print "Searching for Git repositories under:"
+print "  $root_directory"
+print
+
+repositories=()
+
+while IFS= read -r git_directory; do
+  repositories+=("${git_directory:h}")
+done < <(
+  find "$root_directory" \
+    -type d \
+    -name .git \
+    -prune \
+    -print 2>/dev/null
+)
+
+if (( ${#repositories} == 0 )); then
+  print "No Git repositories found."
+  exit 0
+fi
+
+for repository in "${repositories[@]}"; do
+  print "==> $repository"
+
+  if [[ -n "$(git -C "$repository" status --porcelain)" ]]; then
+    print "    Skipped: working tree is dirty"
+    print
+    continue
+  fi
+
+  current_branch="$(
+    git -C "$repository" symbolic-ref --quiet --short HEAD 2>/dev/null ||
+      true
+  )"
+
+  if [[ -z "$current_branch" ]]; then
+    print "    Skipped: detached HEAD"
+    print
+    continue
+  fi
+
+  upstream="$(
+    git -C "$repository" rev-parse \
+      --abbrev-ref \
+      --symbolic-full-name \
+      '@{upstream}' 2>/dev/null ||
+      true
+  )"
+
+  if [[ -z "$upstream" ]]; then
+    print "    Skipped: $current_branch has no upstream"
+    print
+    continue
+  fi
+
+  if git -C "$repository" pull --ff-only; then
+    print "    Updated successfully"
+  else
+    print -u2 "    Pull failed"
+  fi
+
+  print
+done
