@@ -33,6 +33,7 @@ return {
         "javascript",
         "typescript",
         "markdown",
+        "markwodn_inline",
       },
     },
   },
