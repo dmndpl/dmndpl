@@ -17,6 +17,8 @@ brew "mise"
 brew "uv"
 brew "shellcheck"
 
+#nchad dependencies
+brew "tree-sitter-cli"
 
 # Terminal application
 cask "wezterm"

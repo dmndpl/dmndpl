@@ -35,17 +35,17 @@ return {
         "javascript",
         "typescript",
         "markdown",
-        "markwodn_inline",
+        "markdown_inline",
       },
     },
   },
 
-  {
-    "nvim-tree/nvim-tree.lua",
-    opts = {
-      filters = {
-        git_ignored = false,
-      },
-    },
-  },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   opts = {
+  --     filters = {
+  --       git_ignored = false,
+  --     },
+  --   },
+  -- },
 }
