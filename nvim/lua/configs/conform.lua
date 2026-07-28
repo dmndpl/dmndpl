@@ -1,8 +1,8 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    python = {"ruff_format"},
-    svelte = {"prettier"},
+    python = { "ruff_format" },
+    svelte = { "prettier" },
     css = { "prettier" },
     html = { "prettier" },
     javascript = { "prettier" },
@@ -13,6 +13,7 @@ local options = {
     -- These options will be passed to conform.format()
     timeout_ms = 500,
     lsp_fallback = true,
+    lsp_format = "fallback",
   },
 }
 
