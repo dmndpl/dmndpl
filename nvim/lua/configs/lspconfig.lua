@@ -9,6 +9,23 @@ vim.lsp.config("ruff", {
   },
 })
 
+vim.lsp.config("pyright", {
+  before_init = function(_, config)
+    local root = config.root_dir
+    if not root then
+      return
+    end
+
+    local python = root .. "/.venv/bin/python"
+
+    if vim.fn.executable(python) == 1 then
+      config.settings = config.settings or {}
+      config.settings.python = config.settings.python or {}
+      config.settings.python.pythonPath = python
+    end
+  end,
+})
+
 local servers = { "html", "cssls", "pyright", "ruff", "svelte" }
 vim.lsp.enable(servers)
 
