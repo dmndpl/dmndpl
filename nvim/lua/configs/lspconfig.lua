@@ -29,4 +29,11 @@ vim.lsp.config("pyright", {
 local servers = { "html", "cssls", "pyright", "ruff", "svelte" }
 vim.lsp.enable(servers)
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.lsp.inlay_hint.enable(true, {
+      bufnr = args.buf,
+    })
+  end,
+})
 -- read :h vim.lsp.config for changing options of lsp servers
