@@ -23,3 +23,7 @@ brew "tree-sitter-cli"
 
 # Terminal application
 cask "wezterm"
+
+# Containerization
+brew "docker"
+brew "colima"
