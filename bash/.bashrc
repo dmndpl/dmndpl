@@ -147,3 +147,8 @@ if ! shopt -oq posix; then
 fi
 
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# Load machine-specific overrides.
+if [ -f "$HOME/.bashrc.local" ]; then
+    . "$HOME/.bashrc.local"
+fi

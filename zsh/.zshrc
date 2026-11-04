@@ -45,3 +45,8 @@ alias ll="eza -lah --group-directories-first --icons=auto"
 alias cat="bat"
 
 export PATH="$HOME/dev/dmndpl/zsh:$PATH"
+
+# Load machine-specific overrides.
+if [ -f "${ZDOTDIR:-$HOME}/.zshrc.local" ]; then
+    . "${ZDOTDIR:-$HOME}/.zshrc.local"
+fi
